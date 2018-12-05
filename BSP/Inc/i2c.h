@@ -1,6 +1,9 @@
 #ifndef __STM32F769I_EVAL_I2C_H
 #define __STM32F769I_EVAL_I2C_H
 
+#ifndef I2C_H
+#define I2C_H
+
 /* C++ detection */
 #ifdef __cplusplus
  extern "C" {
@@ -18,10 +21,8 @@ I2C4   |PB8   PB9    |PH11  PH12
  *
  *
  */
-#include "stm32fxxx_hal.h"
-#include "defines.h"
-#include "attributes.h"
-#include "tm_stm32_gpio.h"
+#include "mtrain.h"
+// #include "gpio.h"
 
 /**
  * @defgroup I2C_Macros
@@ -33,7 +34,6 @@ I2C4   |PB8   PB9    |PH11  PH12
 #define I2C_CLOCK_STANDARD         100000  /*!< I2C Standard speed */
 #define I2C_CLOCK_FAST_MODE        400000  /*!< I2C Fast mode speed */
 #define I2C_CLOCK_FAST_MODE_PLUS   1000000 /*!< I2C Fast mode plus speed */
-#define I2C_CLOCK_HIGH_SPEED       3400000 /*!< I2C High speed */
 
  /**
  * @}
@@ -51,8 +51,7 @@ I2C4   |PB8   PB9    |PH11  PH12
  */
 typedef enum {
 	I2C_PinsPack_1 = 0x00, /*!< Use Pinspack1 from Pinout table for I2Cx */
-	I2C_PinsPack_2,        /*!< Use Pinspack2 from Pinout table for I2C4 */
-	I2C_PinsPack_Custom    /*!< Use custom pins for I2Cx */
+	I2C_PinsPack_2         /*!< Use Pinspack2 from Pinout table for I2C4 */
 } I2C_PinsPack_t;
 
 /**
@@ -76,11 +75,11 @@ typedef enum {
 /**
  * @brief  Initializes I2C peripheral
  * @param  *I2Cx: Pointer to I2Cx peripheral you will use for iintialization
- * @param  pinspack: Pinspack used for GPIO initialization. This parameter can be a value of @ref TM_I2C_PinsPack_t enumeration
+ * @param  pinspack: Pinspack used for GPIO initialization. This parameter can be a value of @ref I2C_PinsPack_t enumeration
  * @param  clockSpeed: Clock speed in units of Hz for I2C communication
  * @retval Member of @ref I2C_Result_t enumeration
  */
-I2C_Result_t BSP_I2C_Init(I2C_TypeDef* I2Cx, TM_I2C_PinsPack_t pinspack, uint32_t clockSpeed);
+I2C_Result_t BSP_I2C_Init(I2C_TypeDef* I2Cx, I2C_PinsPack_t pinspack, uint32_t clockSpeed);
 
 /**
  * @brief  Reads single byte from device
@@ -195,7 +194,7 @@ I2C_Result_t BSP_I2C_IsDeviceConnected(I2C_TypeDef* I2Cx, uint8_t address);
 /**
  * @brief  Callback for custom pins initialization.
  * 
- *         When you call TM_I2C_Init() function, and if you pass TM_I2C_PinsPack_Custom to function,
+ *         When you call I2C_Init() function, and if you pass I2C_PinsPack_Custom to function,
  *         then this function will be called where you can initialize custom pins for I2C peripheral.
  * @param  *I2Cx: I2C for which initialization will be set
  * @param  AlternateFunction: Alternate function which should be used for GPIO initialization
