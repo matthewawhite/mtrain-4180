@@ -7,11 +7,13 @@
 
 #include "stm32f7xx_hal.h"
 
+#include "gpio.h"
+#include "i2c.h"
+#include "qspi.h"
+#include "usbd_cdc.h"
 #include "usbd_core.h"
 #include "usbd_desc.h"
-#include "usbd_cdc.h"
 #include "usbd_cdc_interface.h"
-#include "qspi.h"
 
 extern void bsp_config(void);
 
