@@ -53,7 +53,7 @@ The code that runs on the Mbed can be found in the Mbed repository [here](https:
 * Connect pin 25 on the MTrain to pin 10 on the Mbed
 * Connect pin 26 on the MTrain to pin 9 on the Mbed
 #### Pushbutton and LED
-* Connect pin 1 on the MTrain to one side of the pushbutton
+* Connect pin 3 on the MTrain to one side of the pushbutton
 * Connect the other side of the pushbutton to the LED
 * Connect the other side of the LED to ground
 #### LCD Screen
