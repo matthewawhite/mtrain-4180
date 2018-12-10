@@ -1,9 +1,6 @@
 #ifndef __STM32F769I_EVAL_I2C_H
 #define __STM32F769I_EVAL_I2C_H
 
-#ifndef I2C_H
-#define I2C_H
-
 /* C++ detection */
 #ifdef __cplusplus
  extern "C" {
@@ -21,8 +18,8 @@ I2C4   |PB8   PB9    |PH11  PH12
  *
  *
  */
-#include "mtrain.h"
-// #include "gpio.h"
+#include "stm32f7xx_hal.h"
+#include "gpio.h"
 
 /**
  * @defgroup I2C_Macros
@@ -79,7 +76,7 @@ typedef enum {
  * @param  clockSpeed: Clock speed in units of Hz for I2C communication
  * @retval Member of @ref I2C_Result_t enumeration
  */
-I2C_Result_t BSP_I2C_Init(I2C_TypeDef* I2Cx, I2C_PinsPack_t pinspack, uint32_t clockSpeed);
+I2C_Result_t I2C_Init(I2C_TypeDef* I2Cx, I2C_PinsPack_t pinspack, uint32_t clockSpeed);
 
 /**
  * @brief  Reads single byte from device
@@ -89,7 +86,7 @@ I2C_Result_t BSP_I2C_Init(I2C_TypeDef* I2Cx, I2C_PinsPack_t pinspack, uint32_t c
  * @param  *data: Pointer to variable where data will be stored from read operation
  * @retval Member of @ref I2C_Result_t enumeration
  */
-I2C_Result_t BSP_I2C_Read(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t register_address, uint8_t* data);
+I2C_Result_t I2C_Read(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t register_address, uint8_t* data);
 
 /**
  * @brief  Reads multiple bytes from device
@@ -100,7 +97,7 @@ I2C_Result_t BSP_I2C_Read(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t reg
  * @param  count: Number of elements to read from device
  * @retval Member of @ref I2C_Result_t enumeration
  */
-I2C_Result_t BSP_I2C_ReadMulti(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t register_address, uint8_t* data, uint16_t count);
+I2C_Result_t I2C_ReadMulti(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t register_address, uint8_t* data, uint16_t count);
 
 /**
  * @brief  Reads I2C data without specifying register address
@@ -110,7 +107,7 @@ I2C_Result_t BSP_I2C_ReadMulti(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_
  * @param  *data: Pointer to variable where data will be stored from read operation
  * @retval Member of @ref I2C_Result_t enumeration
  */
-I2C_Result_t BSP_I2C_ReadNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t* data);
+I2C_Result_t I2C_ReadNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t* data);
 
 /**
  * @brief  Reads multiple bytes from device without specifying register address
@@ -120,7 +117,7 @@ I2C_Result_t BSP_I2C_ReadNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, u
  * @param  count: Number of elements to read from device
  * @retval Member of @ref I2C_Result_t enumeration
  */
-I2C_Result_t BSP_I2C_ReadMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t* data, uint16_t count);
+I2C_Result_t I2C_ReadMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t* data, uint16_t count);
 
 /**
  * @brief  Reads single byte from device with 16-bit register address
@@ -130,7 +127,7 @@ I2C_Result_t BSP_I2C_ReadMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t device_addre
  * @param  *data: Pointer to variable where data will be stored from read operation
  * @retval Member of @ref I2C_Result_t enumeration
  */
-I2C_Result_t BSP_I2C_Read16(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t register_address, uint8_t* data);
+I2C_Result_t I2C_Read16(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t register_address, uint8_t* data);
 
 /**
  * @brief  Writes single byte to device
@@ -140,7 +137,7 @@ I2C_Result_t BSP_I2C_Read16(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t 
  * @param  data: Data to be written to device
  * @retval Member of @ref I2C_Result_t enumeration
  */
-I2C_Result_t BSP_I2C_Write(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t register_address, uint8_t data);
+I2C_Result_t I2C_Write(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t register_address, uint8_t data);
 
 /**
  * @brief  Writes multiple data to device
@@ -151,7 +148,7 @@ I2C_Result_t BSP_I2C_Write(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t re
  * @param  count: Number of elements to write starting at register register_address
  * @retval Member of @ref I2C_Result_t enumeration
  */
-I2C_Result_t BSP_I2C_WriteMulti(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t register_address, uint8_t *data, uint16_t count);
+I2C_Result_t I2C_WriteMulti(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t register_address, uint8_t *data, uint16_t count);
 
 /**
  * @brief  Writes single byte to device without specifying register address, can be used for command write
@@ -160,7 +157,7 @@ I2C_Result_t BSP_I2C_WriteMulti(I2C_TypeDef* I2Cx, uint8_t device_address, uint1
  * @param  data: Data to be written to device
  * @retval Member of @ref I2C_Result_t enumeration
  */
-I2C_Result_t BSP_I2C_WriteNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t data);
+I2C_Result_t I2C_WriteNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t data);
 
 /**
  * @brief  Writes multiple data to device without register address
@@ -170,7 +167,7 @@ I2C_Result_t BSP_I2C_WriteNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, 
  * @param  count: Number of elements to write
  * @retval Member of @ref I2C_Result_t enumeration
  */
-I2C_Result_t BSP_I2C_WriteMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t* data, uint16_t count);
+I2C_Result_t I2C_WriteMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t* data, uint16_t count);
 
 /**
  * @brief  Writes single byte in a 16-bit length register address
@@ -180,7 +177,7 @@ I2C_Result_t BSP_I2C_WriteMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t device_addr
  * @param  data: Data byte to write
  * @retval Member of @ref I2C_Result_t enumeration
  */
-I2C_Result_t BSP_I2C_Write16(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t register_address, uint8_t data);
+I2C_Result_t I2C_Write16(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t register_address, uint8_t data);
 
 
 /**
@@ -189,7 +186,7 @@ I2C_Result_t BSP_I2C_Write16(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t
  * @param  device_address: 7-bit, left aligned device address used for communication
  * @retval Member of @ref I2C_Result_t enumeration
  */
-I2C_Result_t BSP_I2C_IsDeviceConnected(I2C_TypeDef* I2Cx, uint8_t address);
+I2C_Result_t I2C_IsDeviceConnected(I2C_TypeDef* I2Cx, uint8_t address);
 
 /**
  * @brief  Callback for custom pins initialization.
@@ -201,14 +198,14 @@ I2C_Result_t BSP_I2C_IsDeviceConnected(I2C_TypeDef* I2Cx, uint8_t address);
  * @retval None
  * @note   With __weak parameter to prevent link errors if not defined by user
  */
-void BSP_I2C_InitCustomPinsCallback(I2C_TypeDef* I2Cx, uint16_t AlternateFunction);
+void I2C_InitCustomPinsCallback(I2C_TypeDef* I2Cx, uint16_t AlternateFunction);
 
 /**
  * @brief  Gets pointer to I2C handle structure for specific I2C
  * @param  *I2Cx: Pointer to I2Cx used for handle
  * @retval Pointer to I2C Handle structure
  */
-I2C_HandleTypeDef* BSP_I2C_GetHandle(I2C_TypeDef* I2Cx);
+I2C_HandleTypeDef* I2C_GetHandle(I2C_TypeDef* I2Cx);
 
 /**
  * @brief  Writes and receives amount of data via I2C using repeated start condition
@@ -222,7 +219,7 @@ I2C_HandleTypeDef* BSP_I2C_GetHandle(I2C_TypeDef* I2Cx);
  * @param  read_count: Number of elements to read
  * @retval Member of @ref I2C_Result_t enumeration
  */
-I2C_Result_t BSP_I2C_WriteReadRepeatedStart(
+I2C_Result_t I2C_WriteReadRepeatedStart(
 	I2C_TypeDef* I2Cx,
 	uint8_t device_address, 
 	uint8_t write_register_address, 

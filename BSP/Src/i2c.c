@@ -48,7 +48,6 @@ I2C_HandleTypeDef* I2C_GetHandle(I2C_TypeDef* I2Cx) {
  */
 
 static void I2C_FillSettings(I2C_HandleTypeDef* Handle, uint32_t clockSpeed) {
-#if defined(STM32F7xx)
   uint32_t I2C_Timing;
   
   // TODO: Fix these values
@@ -62,11 +61,10 @@ static void I2C_FillSettings(I2C_HandleTypeDef* Handle, uint32_t clockSpeed) {
     /* 100kHz @ 50MHz APB clock */
     I2C_Timing = 0x10911E24;
   }
-#endif
 
   /* Fill settings */
-  Handle->Init.OwnAddress2 = 0x00;
   Handle->Init.OwnAddress1 = 0x00;
+  Handle->Init.OwnAddress2 = 0x00;
   Handle->Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
   Handle->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
   Handle->Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
@@ -74,7 +72,7 @@ static void I2C_FillSettings(I2C_HandleTypeDef* Handle, uint32_t clockSpeed) {
   Handle->Init.Timing = I2C_Timing;
 }
 
-I2C_Result_t BSP_I2C_Init(I2C_TypeDef* I2Cx, I2C_PinsPack_t pinspack, uint32_t clockSpeed) { 
+I2C_Result_t I2C_Init(I2C_TypeDef* I2Cx, I2C_PinsPack_t pinspack, uint32_t clockSpeed) { 
   I2C_HandleTypeDef* Handle = I2C_GetHandle(I2Cx);
   
   /* Fill instance value */
@@ -114,7 +112,7 @@ I2C_Result_t BSP_I2C_Init(I2C_TypeDef* I2Cx, I2C_PinsPack_t pinspack, uint32_t c
   return I2C_Result_Ok;
 }
 
-I2C_Result_t BSP_I2C_Read(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t register_address, uint8_t* data) {
+I2C_Result_t I2C_Read(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t register_address, uint8_t* data) {
   I2C_HandleTypeDef* Handle = I2C_GetHandle(I2Cx);
   
   /* Send address */
@@ -143,7 +141,7 @@ I2C_Result_t BSP_I2C_Read(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t reg
   return I2C_Result_Ok;
 }
 
-I2C_Result_t BSP_I2C_ReadMulti(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t register_address, uint8_t* data, uint16_t count) {
+I2C_Result_t I2C_ReadMulti(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t register_address, uint8_t* data, uint16_t count) {
   I2C_HandleTypeDef* Handle = I2C_GetHandle(I2Cx);
   
   /* Send register address */
@@ -172,7 +170,7 @@ I2C_Result_t BSP_I2C_ReadMulti(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_
   return I2C_Result_Ok;
 }
 
-I2C_Result_t BSP_I2C_ReadNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t* data) {
+I2C_Result_t I2C_ReadNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t* data) {
   I2C_HandleTypeDef* Handle = I2C_GetHandle(I2Cx);
 
   /* Receive single byte without specifying  */
@@ -190,7 +188,7 @@ I2C_Result_t BSP_I2C_ReadNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, u
   return I2C_Result_Ok;
 }
 
-I2C_Result_t BSP_I2C_ReadMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t* data, uint16_t count) {
+I2C_Result_t I2C_ReadMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t* data, uint16_t count) {
   I2C_HandleTypeDef* Handle = I2C_GetHandle(I2Cx);
 
   /* Receive multi bytes without specifying  */
@@ -208,7 +206,7 @@ I2C_Result_t BSP_I2C_ReadMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t device_addre
   return I2C_Result_Ok;
 }
 
-I2C_Result_t BSP_I2C_Write(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t register_address, uint8_t data) {
+I2C_Result_t I2C_Write(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t register_address, uint8_t data) {
   uint8_t d[2];
   I2C_HandleTypeDef* Handle = I2C_GetHandle(I2Cx);
     
@@ -231,7 +229,7 @@ I2C_Result_t BSP_I2C_Write(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t re
   return I2C_Result_Ok;
 }
 
-I2C_Result_t BSP_I2C_WriteMulti(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t register_address, uint8_t* data, uint16_t count) {
+I2C_Result_t I2C_WriteMulti(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t register_address, uint8_t* data, uint16_t count) {
   I2C_HandleTypeDef* Handle = I2C_GetHandle(I2Cx);
 
   /* Try to transmit via I2C */
@@ -249,7 +247,7 @@ I2C_Result_t BSP_I2C_WriteMulti(I2C_TypeDef* I2Cx, uint8_t device_address, uint1
   return I2C_Result_Ok;
 }
 
-I2C_Result_t BSP_I2C_WriteNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t data) {
+I2C_Result_t I2C_WriteNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t data) {
   I2C_HandleTypeDef* Handle = I2C_GetHandle(I2Cx);
   
   /* Try to transmit via I2C */
@@ -267,7 +265,7 @@ I2C_Result_t BSP_I2C_WriteNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, 
   return I2C_Result_Ok;
 }
 
-I2C_Result_t BSP_I2C_WriteMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t* data, uint16_t count) {
+I2C_Result_t I2C_WriteMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t device_address, uint8_t* data, uint16_t count) {
   I2C_HandleTypeDef* Handle = I2C_GetHandle(I2Cx);
   
   /* Try to transmit via I2C */
@@ -285,7 +283,7 @@ I2C_Result_t BSP_I2C_WriteMultiNoRegister(I2C_TypeDef* I2Cx, uint8_t device_addr
   return I2C_Result_Ok;
 }
 
-I2C_Result_t BSP_I2C_Write16(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t register_address, uint8_t data) {
+I2C_Result_t I2C_Write16(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t register_address, uint8_t data) {
   uint8_t d[3];
   I2C_HandleTypeDef* Handle = I2C_GetHandle(I2Cx);
     
@@ -309,7 +307,7 @@ I2C_Result_t BSP_I2C_Write16(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t
   return I2C_Result_Ok;
 }
 
-I2C_Result_t BSP_I2C_Read16(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t register_address, uint8_t* data) {
+I2C_Result_t I2C_Read16(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t register_address, uint8_t* data) {
   uint8_t adr[2];
   I2C_HandleTypeDef* Handle = I2C_GetHandle(I2Cx);
   
@@ -343,7 +341,7 @@ I2C_Result_t BSP_I2C_Read16(I2C_TypeDef* I2Cx, uint8_t device_address, uint16_t 
   return I2C_Result_Ok;
 }
 
-I2C_Result_t BSP_I2C_IsDeviceConnected(I2C_TypeDef* I2Cx, uint8_t device_address) {
+I2C_Result_t I2C_IsDeviceConnected(I2C_TypeDef* I2Cx, uint8_t device_address) {
   I2C_HandleTypeDef* Handle = I2C_GetHandle(I2Cx);
   
   /* Check if device is ready for communication */
@@ -356,7 +354,7 @@ I2C_Result_t BSP_I2C_IsDeviceConnected(I2C_TypeDef* I2Cx, uint8_t device_address
   return I2C_Result_Ok;
 }
 
-I2C_Result_t BSP_I2C_WriteReadRepeatedStart(
+I2C_Result_t I2C_WriteReadRepeatedStart(
   I2C_TypeDef* I2Cx,
   uint8_t device_address, 
   uint8_t write_register_address, 

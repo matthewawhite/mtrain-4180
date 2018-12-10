@@ -7,7 +7,7 @@ endef
 all:
 	$(call cmake_build_target, all)
 
-FIRMWARE_TESTS = blink flash usb_serial blink_gpio
+FIRMWARE_TESTS = blink flash usb_serial blink_gpio communicate_i2c
 $(FIRMWARE_TESTS:%=test-%):
 	$(call cmake_build_target, $(@F))
 $(FIRMWARE_TESTS:%=test-%-prog):

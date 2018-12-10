@@ -8,7 +8,10 @@ void GPIO_INT_EnableClock(GPIO_TypeDef* GPIOx);
 void GPIO_INT_DisableClock(GPIO_TypeDef* GPIOx);
 void GPIO_INT_Init(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_Mode_t GPIO_Mode, GPIO_OType_t GPIO_OType, GPIO_PuPd_t GPIO_PuPd, GPIO_Speed_t GPIO_Speed);
 
-void GPIO_Init(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_Mode_t GPIO_Mode, GPIO_OType_t GPIO_OType, GPIO_PuPd_t GPIO_PuPd, GPIO_Speed_t GPIO_Speed) {	
+void GPIO_Init(GPIO_Pin_Num pin, GPIO_Mode_t GPIO_Mode, GPIO_OType_t GPIO_OType, GPIO_PuPd_t GPIO_PuPd, GPIO_Speed_t GPIO_Speed) {	
+	GPIO_Pin = pin;
+
+
 	/* Check input */
 	if (GPIO_Pin == 0x00) {
 		return;
@@ -20,6 +23,19 @@ void GPIO_Init(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_Mode_t GPIO_Mode, GP
 	/* Do initialization */
 	GPIO_INT_Init(GPIOx, GPIO_Pin, GPIO_Mode, GPIO_OType, GPIO_PuPd, GPIO_Speed);
 }
+
+// void GPIO_Init(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_Mode_t GPIO_Mode, GPIO_OType_t GPIO_OType, GPIO_PuPd_t GPIO_PuPd, GPIO_Speed_t GPIO_Speed) {	
+// 	/* Check input */
+// 	if (GPIO_Pin == 0x00) {
+// 		return;
+// 	}
+	
+// 	/* Enable clock for GPIO */
+// 	GPIO_INT_EnableClock(GPIOx);
+	
+// 	/* Do initialization */
+// 	GPIO_INT_Init(GPIOx, GPIO_Pin, GPIO_Mode, GPIO_OType, GPIO_PuPd, GPIO_Speed);
+// }
 
 void GPIO_InitAlternate(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_OType_t GPIO_OType, GPIO_PuPd_t GPIO_PuPd, GPIO_Speed_t GPIO_Speed, uint8_t Alternate) {
 	uint32_t pinpos;
@@ -226,3 +242,49 @@ uint16_t GPIO_GetFreePins(GPIO_TypeDef* GPIOx) {
 	/* Return free pins */
 	return ~GPIO_UsedPins[GPIO_GetPortSource(GPIOx)];
 }
+
+GPIO_TypeDef* GPIO_GetPort(uint16_t pin_num) {
+	if (pin_num == 3 || pin_num == 3 || pin_num == 6 || pin_num == 7 || pin_num == 31
+		|| pin_num == 32 || pin_num == 33) {
+		return GPIOA;
+	} else if (pin_num == 4 || pin_num == 5 || pin_num == 19 || pin_num == 20 || pin_num == 25
+			   || pin_num == 26 || pin_num == 35) {
+		return GPIOB;
+	} else if (pin_num == 8 || pin_num == 9 || pin_num == 10 || pin_num == 11 || pin_num == 34 
+			   || pin_num == 36) {
+		return GPIOC;
+	} else if (pin_num == 16 || pin_num == 17 || pin_num == 18) {
+		return GPIOD;
+	} else if (pin_num == 27 || pin_num == 28 || pin_num == 29 || pin_num == 30) {
+		return GPIOF;
+	} else if (pin_num == 12 || pin_num == 13 || pin_num == 14) {
+		return GPIOH;
+	} else if (pin_num == 15) {
+		return GPIOI;
+	}
+}
+
+uint16_t GPIO_GetPin(uint16_t pin_num) {
+	if (pin_num == 3 || pin_num == 10 || pin_num == 20 || pin_num == 28) {
+		return GPIO_PIN_8;
+	} else if (pin_num == 9 || pin_num == 18 || pin_num == 26 || pin_num == 29) {
+		return GPIO_PIN_7;
+	} else if (pin_num == )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -5,6 +5,6 @@ int main(void) {
 
   while (1) {
     HAL_Delay(100);
-    GPIO_TogglePinValue(GPIOA, GPIO_PIN_8);
+    GPIO_TogglePinValue(GPIOE, GPIO_PIN_4);
   }
 }
