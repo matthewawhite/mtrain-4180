@@ -12,7 +12,7 @@ The MTrain is a new devboard based on the Cortex M7 being developed by [robojack
 For the 4180 project we have implemented the API for DigitalIO and I2C on the MTrain. Our demo specifically connects a pushbutton to an led through the MTrain to demonstrate the DigitalIO while also sending `Hello I2C!` over the I2C line to an Mbed which then displays it on the LCD screen.
 
 # Code
-## MTrain
+### MTrain
 The code that runs on the MTrain can be found in the repo connected to this website or by following this [link](https://github.com/matthewawhite/mtrain-4180)
 The specific code that was written for this project can be found in the following locations:
 * DigitalIO
@@ -22,7 +22,7 @@ The specific code that was written for this project can be found in the followin
    * [Headers](https://github.com/matthewawhite/mtrain-4180/blob/master/BSP/Inc/i2c.h)
    * [Source](https://github.com/matthewawhite/mtrain-4180/blob/master/BSP/Src/i2c.c)
 
-## Mbed
+### Mbed
 The code that runs on the Mbed can be found in the Mbed repository [here](https://os.mbed.com/users/mwhite98/code/4180_Project/)
 
 # Demonstration Setup
@@ -46,6 +46,7 @@ The code that runs on the Mbed can be found in the Mbed repository [here](https:
 * 1x uLCD-144-G2
 * 1x Breadboard
 * 1x JLink Segger and JTag adapter (For flashing the MTrain)
+
 ### Setup
 #### Ground
 * Connect the Ground lines of the Mbed and the MTrain to the Ground rail of the breadboard
