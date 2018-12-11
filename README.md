@@ -1,5 +1,5 @@
 # What is MTrain
-The MTrain is a new devboard based on the Cortex M7 being developed by [robojackets](https://robojackets.org/) to replace the Mbed in our robotics applications. The MTrain has many advantages over the Mbed, most notably:
+The MTrain is a new devboard based on the Cortex M7 being developed by [RoboJackets](https://robojackets.org/) to replace the Mbed in our robotics applications. The MTrain has many advantages over the Mbed, most notably:
 * Hardware Floating Point Unit
 * 256 MB of Flash Memory
 * 256 MB of RAM
