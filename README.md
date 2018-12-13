@@ -68,7 +68,7 @@ The code that runs on the Mbed can be found in the Mbed repository [here](https:
 * Connect the MTrain to USB power
 
 ## Results
-If everything was done correctly pushing the button should turn on the LED and the LCD screen should be repeatedly flashing `Hello I2C!` as shown in the video linked below:
+If everything was done correctly pushing the button should turn on the LED and the LCD screen should be repeatedly flashing `Hello I2C!` as shown in the video below:
 <video width="448" height="336" controls>
   <source src="media/Blinking_I2C.mp4" type="video/mp4">
 </video>
